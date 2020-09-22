@@ -2,7 +2,7 @@ language: c
 dist: trusty
 sudo: required
 arch:
-  - amd64
+        #  - amd64
   - ppc64le
 
 env:
@@ -14,6 +14,7 @@ env:
 
 script:
   - ci/travis-install.sh
+  - if [ "$TRAVIS_ARCH" = "ppc64le" ]; then sudo $systemctl status docker; sudo $systemctl restart docker; fi
   - ci_parallel=2 ci_sudo=yes ci/travis-build.sh
 
 notifications:
