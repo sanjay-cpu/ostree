@@ -57,7 +57,7 @@ NULL=
 : "${ci_configopts:=}"
 
 if [ -n "$ci_docker" ]; then
-    exec docker run \
+    exec docker run -i ci-image \
         --env=ci_docker="" \
         --env=ci_parallel="${ci_parallel}" \
         --env=ci_sudo=yes \
@@ -65,7 +65,6 @@ if [ -n "$ci_docker" ]; then
         --env=ci_test_fatal="${ci_test_fatal}" \
         --env=ci_configopts="${ci_configopts}" \
         --privileged \
-        ci-image \
         ci/travis-build.sh
 fi
 
