@@ -58,7 +58,6 @@ NULL=
 
 if [ -n "$ci_docker" ]; then
     exec docker run -i ci-image \
-        --env=ci_docker="" \
         --env=ci_parallel="${ci_parallel}" \
         --env=ci_sudo=yes \
         --env=ci_test="${ci_test}" \
