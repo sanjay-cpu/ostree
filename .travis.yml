@@ -11,10 +11,12 @@ env:
   - ci_docker=debian:buster-slim ci_distro=debian ci_suite=stretch ci_configopts="--with-curl --with-ed25519-libsodium --without-gpgme" ci_pkgs="libsodium-dev"
   - ci_docker=ubuntu:xenial ci_distro=ubuntu ci_suite=xenial
   - ci_docker=ubuntu:bionic ci_distro=ubuntu ci_suite=bionic
-
+before_script:
+  - if [ "$TRAVIS_ARCH" = "ppc64le" ]; then apt-get update; apt-get install sudo -y; fi
 script:
   - ci/travis-install.sh
-  - if [ "$TRAVIS_ARCH" = "ppc64le" ]; then sudo $systemctl status docker; sudo $systemctl restart docker; fi
+    #- if [ "$TRAVIS_ARCH" = "ppc64le" ]; then sudo $systemctl status docker; sudo $systemctl restart docker; fi
+    # - if [ "$TRAVIS_ARCH" = "ppc64le" ]; then apt-get update; apt-get install sudo -y; fi
   - ci_parallel=2 ci_sudo=yes ci/travis-build.sh
 
 notifications:
