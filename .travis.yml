@@ -1,6 +1,9 @@
 language: c
 dist: trusty
 sudo: required
+arch:
+  - amd64
+  - ppc64le
 
 env:
   # debian has libsodium-dev, ubuntu doesn't in core at least
