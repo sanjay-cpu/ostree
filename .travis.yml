@@ -15,7 +15,7 @@ before_script:
   - if [ "$TRAVIS_ARCH" = "ppc64le" ]; then sudo apt-get update; sudo apt-get install sudo -y; fi
 script:
   - ci/travis-install.sh
-    #- if [ "$TRAVIS_ARCH" = "ppc64le" ]; then sudo $systemctl status docker; sudo $systemctl restart docker; fi
+  - if [ "$TRAVIS_ARCH" = "ppc64le" ]; then sudo systemctl status docker; sudo systemctl restart docker; fi
     # - if [ "$TRAVIS_ARCH" = "ppc64le" ]; then apt-get update; apt-get install sudo -y; fi
   - ci_parallel=2 ci_sudo=yes ci/travis-build.sh
 
